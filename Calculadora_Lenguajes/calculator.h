@@ -1,0 +1,44 @@
+/*
+ * calculator.h
+ *
+ *  Created on: 12 nov. 2018
+ *      Author: Serah
+ */
+
+#ifndef CALCULATOR_H_
+#define CALCULATOR_H_
+
+#pragma once
+
+#include <cstdlib>
+#include <stdlib.h>
+#include "language.h"
+#include <set>
+
+class calculator_t
+{
+private:
+
+	language_t language_;
+	language_t language2_;
+
+public:
+
+	calculator_t();
+	virtual ~calculator_t();
+
+	void inverse();
+	void concatenation();
+	void unionl();
+	void intersection();
+	void diference();
+	void sublanguage();
+	void equality();
+	void potency();
+	void kleene();
+
+	std::string request_language();
+	void menu();
+};
+
+#endif /* CALCULATOR_H_ */

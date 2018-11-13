@@ -28,6 +28,7 @@ public:
 	virtual ~symbols_t();
 
 	void set_symbol(std::string symbol);
+	std::string get_symbol();
 	std::string get_symbol() const;
 
 
@@ -36,6 +37,6 @@ public:
 	bool operator==(const symbols_t &symbol) const;
 };
 
-std::ostream &operator<<(std::ostream &os, symbols_t& symbol);
+std::ostream& operator<<(std::ostream &os, const symbols_t& symbol);
 
 #endif /* SYMBOLS_H_ */

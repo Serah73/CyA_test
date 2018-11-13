@@ -7,8 +7,7 @@
 
 #include "symbols.h"
 
-symbols_t::symbols_t():
-symbol_('')
+symbols_t::symbols_t()
 {}
 
 symbols_t::symbols_t(std::string symbol):
@@ -25,6 +24,11 @@ symbols_t::~symbols_t()
 void symbols_t::set_symbol(std::string symbol)
 {
 	symbol_ = symbol;
+}
+
+std::string symbols_t::get_symbol()
+{
+	return symbol_;
 }
 
 std::string symbols_t::get_symbol() const
@@ -54,7 +58,7 @@ bool symbols_t::operator==(const symbols_t &symbol) const
 	return false;
 }
 
-std::ostream &operator<<(std::ostream &os, symbols_t& symbol)
+std::ostream& operator<<(std::ostream &os,const symbols_t& symbol)
 {
 	os << symbol.get_symbol();
 
