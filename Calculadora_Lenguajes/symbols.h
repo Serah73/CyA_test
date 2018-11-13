@@ -23,7 +23,7 @@ private:
 public:
 	symbols_t();
 	symbols_t(std::string symbol);
-	symbols_t(const symbols_t & symbol);
+	symbols_t(const symbols_t &symbol);
 
 	virtual ~symbols_t();
 
@@ -31,10 +31,12 @@ public:
 	std::string get_symbol();
 	std::string get_symbol() const;
 
+	std::string add_symbol(symbols_t &a, symbols_t &b);
 
 	symbols_t &operator=(const symbols_t &symbol);
 	bool operator<(const symbols_t &symbol) const;
 	bool operator==(const symbols_t &symbol) const;
+	symbols_t& operator+(const symbols_t &symbol);
 };
 
 std::ostream& operator<<(std::ostream &os, const symbols_t& symbol);

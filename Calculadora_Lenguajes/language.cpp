@@ -25,7 +25,7 @@ language_t::language_t(std::string str)
             if ((str[i] == ',') || (str[i] == '}'))
             {
                 symbols_t temp(aux);
-                std::cout << "Añadimos a '" << temp << "' al set.\n";
+                //std::cout << "Añadimos a '" << temp << "' al set.\n";
                 language_.insert(temp);
                 std::cout << "Set: ";
 
@@ -127,7 +127,7 @@ void language_t::operator()(std::string str)
             if ((str[i] == ',') || (str[i] == '}'))
             {
                 symbols_t temp(aux);
-                std::cout << "A�adimos a '" << temp << "' al set.\n";
+                //std::cout << "Añadimos a '" << temp << "' al set.\n";
                 language_.insert(temp);
                 std::cout << "Set: ";
 

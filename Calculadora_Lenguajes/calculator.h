@@ -28,7 +28,11 @@ public:
 	virtual ~calculator_t();
 
 	void inverse();
+	void inverse_aux(language_t language);
+	
 	void concatenation();
+	symbols_t prueba_concatenacion(symbols_t a, symbols_t b);
+	
 	void unionl();
 	void intersection();
 	void diference();

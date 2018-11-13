@@ -15,15 +15,22 @@ calculator_t::calculator_t()
 
 calculator_t::~calculator_t() {}
 
-
 void calculator_t::inverse()
 {
-	std::set<symbols_t>::reverse_iterator reverse = language_.get_rlanguage();
-	std::set<symbols_t>::reverse_iterator end_while = language_.get_end_rlanguage();
-	std::set<symbols_t>::reverse_iterator aux = language_.get_end_rlanguage();
+	    std::cout << "\n\tInversa\n\t\tlenguaje (1): {";
+	    inverse_aux(language_);
+	    
+	    std::cout << "\n\tInversa\n\t\tlenguaje (2): {";
+		inverse_aux(language2_);
+}
+
+void calculator_t::inverse_aux(language_t language)
+{
+	std::set<symbols_t>::reverse_iterator reverse = language.get_rlanguage();
+	std::set<symbols_t>::reverse_iterator end_while = language.get_end_rlanguage();
+	std::set<symbols_t>::reverse_iterator aux = language.get_end_rlanguage();
 	aux--;
 
-    std::cout << "\nInversa: {";
     while (reverse != end_while)
     {
     	if(reverse == aux)
@@ -37,10 +44,51 @@ void calculator_t::inverse()
     std::cout << "}\n";
 }
 
-void calculator_t::concatenation()
+void calculator_t::concatenation()		////modificar
 {
-
+	std::set<symbols_t> final;
+	std::set<symbols_t> laux = language_.get_language();
+	std::set<symbols_t> l2aux = language2_.get_language();
+	
+    symbols_t aux;
+    
+    
+    for (std::set<symbols_t>::iterator i = laux.begin(); i != laux.end(); i++) 
+    {
+        for (std::set<symbols_t>::iterator j = l2aux.begin(); j != l2aux.end(); j++) 
+        {
+            //aux.set_symbol(aux.add_symbol(*i, *j) );
+            //aux = *i + *j;
+            aux = prueba_concatenacion(*i, *j);
+            
+            final.insert(aux);
+        }
+    }
+    std::cout << "\n\tConcatenacion\n\t\tlenguaje final: {";
+    std::set<symbols_t>::iterator auxS = final.end();
+    auxS--;
+    
+    for (std::set<symbols_t>::iterator k = final.begin(); k != final.end(); k++)
+    {
+        if (auxS == k) 
+        	std::cout << *k;
+        else 
+        	std::cout << *k << ", ";
+    }
+    std::cout << "}\n";
 }
+
+symbols_t calculator_t::prueba_concatenacion(symbols_t a, symbols_t b)
+{
+	symbols_t aux;
+	
+	//aux.set_symbol( a.get_symbol() + b.get_symbol() );
+	aux = a+b;
+	
+	
+	return aux;
+}
+
 
 void calculator_t::unionl()
 {
@@ -98,7 +146,7 @@ void calculator_t::menu()
 		std::cout << "10 -\tCierre de Kleene.\n";
 		std::cout << "0  -\tSalir.\n";
 
-		std::cout << "\tElige la opcion: ";
+		std::cout << "\n\tElige la opcion: ";
 		std::cin >> option;
 		std::cout << "\n\n";
 		
@@ -172,8 +220,11 @@ std::string calculator_t::request_language()
 	std::cout << "Introduce un lenguaje: ";
 	std::getline(std::cin, input);
 
-	while((input[0] != '{') && (input[0] != '('))
+	while((input[0] != '{') && (input[0] != '('))	//se imprime 2 veces porque si
 	{
+		
+	////////////////////////////////////////////////////////////////////
+	////////              D U D A                             //////////
 	        std::cout << "*Introduzca el lenguaje correctamente *: ";
 	        std::getline(std::cin, input);
 	}

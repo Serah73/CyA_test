@@ -36,6 +36,15 @@ std::string symbols_t::get_symbol() const
 	return symbol_;
 }
 
+std::string add_symbol(symbols_t &a, symbols_t &b)
+{
+	std::string aux;	
+	aux = a.get_symbol() + b.get_symbol();
+	
+	return aux;
+}
+
+
 //////////////OPERATOR/////////////////
 symbols_t& symbols_t::operator=(const symbols_t &symbol)
 {
@@ -58,9 +67,17 @@ bool symbols_t::operator==(const symbols_t &symbol) const
 	return false;
 }
 
+symbols_t& symbols_t::operator+(const symbols_t &a)
+{
+	this->symbol_ = this->get_symbol() + a.get_symbol();
+	
+	return *this;
+}
+
 std::ostream& operator<<(std::ostream &os,const symbols_t& symbol)
 {
 	os << symbol.get_symbol();
 
 	return os;
 }
+
