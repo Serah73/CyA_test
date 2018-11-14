@@ -56,14 +56,44 @@ std::set<symbols_t> language_t::get_language()
 	return language_;
 }
 
-std::set<symbols_t>::reverse_iterator language_t::get_rlanguage()
+
+std::set<symbols_t>::iterator language_t::get_begin_language()
+{
+    std::set<symbols_t>::iterator reverse = language_.begin();
+    
+    return reverse;
+}
+
+std::set<symbols_t>::iterator language_t::get_begin_language() const
+{
+    std::set<symbols_t>::iterator reverse = language_.begin();
+    
+    return reverse;
+}
+	
+std::set<symbols_t>::iterator language_t::get_end_language()
+{
+    std::set<symbols_t>::iterator reverse = language_.end();
+    
+    return reverse;    
+}
+
+std::set<symbols_t>::iterator language_t::get_end_language() const
+{
+    std::set<symbols_t>::iterator reverse = language_.end();
+    
+    return reverse;
+}
+
+
+std::set<symbols_t>::reverse_iterator language_t::get_begin_rlanguage()
 {
 	std::set<symbols_t>::reverse_iterator reverse = language_.rbegin();
 
 	return reverse;
 }
 
-std::set<symbols_t>::reverse_iterator language_t::get_rlanguage() const
+std::set<symbols_t>::reverse_iterator language_t::get_begin_rlanguage() const
 {
 	std::set<symbols_t>::reverse_iterator reverse = language_.rbegin();
 
@@ -113,6 +143,12 @@ void language_t::set_language(std::set<symbols_t> symb)
 void language_t::set_alphabet(std::set<char> symb)
 {
 	alphabet_ = symb;
+}
+
+void language_t::clear()
+{
+    language_.clear();
+    alphabet_.clear();
 }
 
 void language_t::operator()(std::string str)

@@ -12,8 +12,11 @@
 
 #include <cstdlib>
 #include <stdlib.h>
-#include "language.h"
+#include <iterator>
+#include <algorithm>
 #include <set>
+
+#include "language.h"
 
 class calculator_t
 {

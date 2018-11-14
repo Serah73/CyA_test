@@ -19,7 +19,7 @@ class language_t
 private:
 
 	std::set<symbols_t> language_;
-	std::set<char> alphabet_;
+	std::set<char>		alphabet_;
 
 public:
 
@@ -31,8 +31,14 @@ public:
 	std::set<symbols_t> get_language() const;
 	std::set<symbols_t> get_language();
 	
-	std::set<symbols_t>::reverse_iterator get_rlanguage();
-	std::set<symbols_t>::reverse_iterator get_rlanguage() const;
+	std::set<symbols_t>::iterator get_begin_language();
+	std::set<symbols_t>::iterator get_begin_language() const;
+	
+	std::set<symbols_t>::iterator get_end_language();
+	std::set<symbols_t>::iterator get_end_language() const;
+	
+	std::set<symbols_t>::reverse_iterator get_begin_rlanguage();
+	std::set<symbols_t>::reverse_iterator get_begin_rlanguage() const;
 	
 	std::set<symbols_t>::reverse_iterator get_end_rlanguage();
 	std::set<symbols_t>::reverse_iterator get_end_rlanguage() const;
@@ -44,6 +50,8 @@ public:
 	void set_symbol_alph(char symb);
 	void set_language(std::set<symbols_t> symb);
 	void set_alphabet(std::set<char> symb);
+	
+	void clear();
 
 	void operator()(std::string str);
 };

@@ -26,7 +26,7 @@ void calculator_t::inverse()
 
 void calculator_t::inverse_aux(language_t language)
 {
-	std::set<symbols_t>::reverse_iterator reverse = language.get_rlanguage();
+	std::set<symbols_t>::reverse_iterator reverse = language.get_begin_rlanguage();
 	std::set<symbols_t>::reverse_iterator end_while = language.get_end_rlanguage();
 	std::set<symbols_t>::reverse_iterator aux = language.get_end_rlanguage();
 	aux--;
@@ -52,7 +52,6 @@ void calculator_t::concatenation()		////modificar
 	
     symbols_t aux;
     
-    
     for (std::set<symbols_t>::iterator i = laux.begin(); i != laux.end(); i++) 
     {
         for (std::set<symbols_t>::iterator j = l2aux.begin(); j != l2aux.end(); j++) 
@@ -60,7 +59,6 @@ void calculator_t::concatenation()		////modificar
             //aux.set_symbol(aux.add_symbol(*i, *j) );
             //aux = *i + *j;
             aux = prueba_concatenacion(*i, *j);
-            
             final.insert(aux);
         }
     }
@@ -92,7 +90,16 @@ symbols_t calculator_t::prueba_concatenacion(symbols_t a, symbols_t b)
 
 void calculator_t::unionl()
 {
-
+	std::set<symbols_t> aux = language_.get_language();
+	
+	std::ostream_iterator<symbols_t> iter(std::cout, ", ");
+	
+    std::cout << "\n\tUnion de los lenguajes: {";
+    
+    std::set_union(language_.get_begin_language(), language_.get_end_language(),
+    			language2_.get_begin_language(), language2_.get_end_language(), iter);
+    
+    std::cout <<"}";
 }
 
 void calculator_t::intersection()
@@ -157,12 +164,15 @@ void calculator_t::menu()
 				break;
 	
 			case 1:
+				language_.clear();
+				language2_.clear();
 				language_(request_language());
 				language2_(request_language());
 				break;
 
 			case 2:
 				//inversa
+				std::cout << "antes\n";
 				inverse();
 				break;
 
@@ -216,7 +226,6 @@ void calculator_t::menu()
 std::string calculator_t::request_language()
 {
 	std::string input;
-
 	std::cout << "Introduce un lenguaje: ";
 	std::getline(std::cin, input);
 
