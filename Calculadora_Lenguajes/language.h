@@ -42,6 +42,8 @@ public:
 	
 	std::set<symbols_t>::reverse_iterator get_end_rlanguage();
 	std::set<symbols_t>::reverse_iterator get_end_rlanguage() const;
+	
+	std::set<symbols_t>::iterator find(symbols_t symb);
 
 	std::set<char> get_alphabet() const;
 	std::set<char> get_alphabet();

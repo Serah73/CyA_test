@@ -114,6 +114,13 @@ std::set<symbols_t>::reverse_iterator language_t::get_end_rlanguage() const
 	return reverse;
 }
 
+std::set<symbols_t>::iterator language_t::find(symbols_t symb)
+{
+    std::set<symbols_t>::iterator it = language_.find(symb);
+    
+    return it;
+}
+
 
 std::set<char> language_t::get_alphabet() const
 {

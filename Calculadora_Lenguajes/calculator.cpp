@@ -90,36 +90,87 @@ symbols_t calculator_t::prueba_concatenacion(symbols_t a, symbols_t b)
 
 void calculator_t::unionl()
 {
-	std::set<symbols_t> aux = language_.get_language();
+	//std::set<symbols_t> aux = language_.get_language();
 	
 	std::ostream_iterator<symbols_t> iter(std::cout, ", ");
 	
     std::cout << "\n\tUnion de los lenguajes: {";
     
     std::set_union(language_.get_begin_language(), language_.get_end_language(),
-    			language2_.get_begin_language(), language2_.get_end_language(), iter);
+    			   language2_.get_begin_language(), language2_.get_end_language(), iter);
     
     std::cout <<"}";
 }
 
 void calculator_t::intersection()
 {
-
+	//std::set<symbols_t> laux = language_.get_language();
+	//std::set<symbols_t> l2aux = language_.get_language();
+    std::ostream_iterator<symbols_t> iter( std::cout, ", " );
+    std::cout << "\n\tIterseccion: {";
+    std::set_intersection(language_.get_begin_language(), language_.get_end_language(),
+    					  language2_.get_begin_language(), language2_.get_end_language(),
+    					  iter);
+    std::cout << "}";
 }
 
 void calculator_t::diference()
 {
-
+    std::ostream_iterator<symbols_t> iter( std::cout, ", " );
+    std::cout << "\n\tDiferencia, lenguaje(1 - 2): {";
+    std::set_difference(language_.get_begin_language(), language_.get_end_language(),
+    					  language2_.get_begin_language(), language2_.get_end_language(),
+    					  iter);
+    std::cout << "}";
+    
+    std::cout << "\n\tDiferencia, lenguaje(2 - 1): {";
+    std::set_difference(language2_.get_begin_language(), language2_.get_end_language(),
+    					  language_.get_begin_language(), language_.get_end_language(),
+    					  iter);
+    std::cout << "}";
 }
 
 void calculator_t::sublanguage()
 {
+	bool its = true;
 
+    std::set<symbols_t>::iterator it = language2_.get_begin_language();
+     
+    while ( (it != language2_.get_end_language() ) && (its) )
+    {
+    	its = language_.find(*it) != language_.get_end_language();
+    	it++;
+    }
+    
+    if (its)
+        std::cout << "\t\tEl lenguaje (2) es un sublenguaje del lenguaje(1)\n";
+    else
+        std::cout << "\t\tEl lenguaje (2) no es un sublenguaje del lenguaje(1)\n";
 }
 
 void calculator_t::equality()
 {
-
+	bool its = true;
+	
+    std::set<symbols_t>::iterator it = language2_.get_begin_language();
+    std::set<symbols_t>::iterator j = language_.get_begin_language();
+     
+    while ( (it != language2_.get_end_language()) && (its) )
+    {
+    	its = language_.find(*it) != language_.get_end_language();
+    	it++;
+    }
+    
+    while ( (j != language_.get_end_language()) && (its) )
+    {
+    	its = language2_.find(*j) != language2_.get_end_language();
+    	j++;
+    }
+    
+    if (its)
+        std::cout << "\t\tLos lenguajes son iguales\n";
+    else
+        std::cout << "\t\tLos lenguajes no son iguales\n";
 }
 
 void calculator_t::potency()
