@@ -216,9 +216,44 @@ void calculator_t::potency()
     }
 }
 
-void calculator_t::kleene()
+void calculator_t::kleene(std::set<symbols_t> language)
 {
-
+    symbols_t temp("&");
+    std::set<symbols_t> final;
+	/*
+    std::set<symbols_t> acum = language;
+    std::set<symbols_t> laux = language;
+    std::ostream_iterator<symbols_t> iter( std::cout, " " );
+    
+    final.insert(temp);
+    
+    std::cout << "\tResultado del cierre (n = 5): ";
+    std::cout << "\n\t{";
+    std::set_union(final.begin(), final.end(), acum.begin(), acum.end(), iter);
+    std::cout << "}";
+    
+    for (int it = 0; it < 2; it++) {
+        
+        for (std::set<symbols_t>::iterator i = language.begin(); i != language.end(); i++)
+        {
+            for (std::set<symbols_t>::iterator j = laux.begin(); j != laux.end(); j++)
+            {
+                
+                temp = prueba_concatenacion(*i, *j);
+                acum.insert(temp);
+                
+            }
+            std::cout << "\n\t{";
+            std::set_union(final.begin(), final.end(), acum.begin(), acum.end(), iter);
+            std::cout << "}";
+        }
+        laux = acum;
+    }
+    
+    std::cout << "\n" << "\t\t\t...\n";
+    std::cout << "\t\t\t...\n";
+    std::cout << "\t\t\t...\n";*/
+    
 }
 
 void calculator_t::menu()
@@ -226,21 +261,21 @@ void calculator_t::menu()
 	int option;
 
 	do{
-		//system("clear");
+		system("clear");
 		std::cout << "\n\t\t ----MENU----\n\n";
 
 
-		std::cout << "1  -\tCambiar los dos lenguajes.\n";
-		std::cout << "2  -\tInversa.\n";
-		std::cout << "3  -\tConcatenacion.\n";
-		std::cout << "4  -\tUnion.\n";
-		std::cout << "5  -\tInterseccion.\n";
-		std::cout << "6  -\tDiferencia.\n";
-		std::cout << "7  -\tSublenguajes.\n";
-		std::cout << "8  -\tIgualdad de lenguajes.\n";
-		std::cout << "9  -\tPotencia.\n";
-		std::cout << "10 -\tCierre de Kleene.\n";
-		std::cout << "0  -\tSalir.\n";
+		std::cout << "\t 1  -\tCambiar los dos lenguajes.\n";
+		std::cout << "\t 2  -\tInversa.\n";
+		std::cout << "\t 3  -\tConcatenacion.\n";
+		std::cout << "\t 4  -\tUnion.\n";
+		std::cout << "\t 5  -\tInterseccion.\n";
+		std::cout << "\t 6  -\tDiferencia.\n";
+		std::cout << "\t 7  -\tSublenguajes.\n";
+		std::cout << "\t 8  -\tIgualdad de lenguajes.\n";
+		std::cout << "\t 9  -\tPotencia.\n";
+		std::cout << "\t10  -\tCierre de Kleene.\n";
+		std::cout << "\t 0  -\tSalir.\n";
 
 		std::cout << "\n\tElige la opcion: ";
 		std::cin >> option;
@@ -257,52 +292,106 @@ void calculator_t::menu()
 				language2_.clear();
 				language_(request_language());
 				language2_(request_language());
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 
 			case 2:
 				//inversa
 				std::cout << "antes\n";
 				inverse();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 
 			case 3:
 				//concatenacion
 				concatenation();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 	
 			case 4:
 				//union
 				unionl();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 	
 			case 5:
 				//interseccion
 				intersection();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 		
 			case 6:
 				//diferencia
 				diference();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 
 			case 7:
 				//sublenguajes
 				sublanguage();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 	
 			case 8:
 				//igualdad de lenguajes
 				equality();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 	
 			case 9:
 				//potencia
 				potency();
+				
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;	
 
 			case 10:
 				//kleene
-				kleene();
+				/*
+				std::cout << "¿Que lenguaje quiere realizarle el cierre de kleene?(1- lenguaje(1), 2- lenguaje(2): ";
+				int lenguaje;
+				std::cin >> lenguaje;
+				*/
+				std::cout << "\tNo hecho correctamente. Mantenimiento...\n";
+				/*
+				if(lenguaje == 1)
+					kleene(language_.get_language());
+					
+				else if(lenguaje == 2)
+					kleene(language2_.get_language());
+					
+				else
+					std::cout << "\tEso no te lo he dicho\n";
+				*/
+				std::cout << "\n\t---Pulse Enter para volver al menu...---";
+				std::cin.ignore();
+				std::cin.ignore();
 				break;
 
 			default:

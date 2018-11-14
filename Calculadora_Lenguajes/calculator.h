@@ -42,7 +42,7 @@ public:
 	void sublanguage();
 	void equality();
 	void potency();
-	void kleene();
+	void kleene(std::set<symbols_t> language);
 
 	std::string request_language();
 	void menu();
