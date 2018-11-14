@@ -175,7 +175,45 @@ void calculator_t::equality()
 
 void calculator_t::potency()
 {
-
+    int n;
+    
+    symbols_t temp;
+    std::set<symbols_t> final;
+    std::set<symbols_t> aux = language_.get_language();
+    
+    std::cout << "\n\t¿Cuanto desea elevar el leguaje? ";
+    std::cin >> n;
+    
+    if(n == 1)
+    {
+        std::cout << "\n\t\tResultado potencia: {";
+        
+        for ( std::set<symbols_t>::iterator it = language_.get_begin_language(); it != language_.get_end_language(); it++ )
+            std::cout << *it << ", ";
+        std::cout << "}\n";
+    }else
+    {
+        for ( int it = 0; it < n - 1; it++ ) 
+        {
+            for ( std::set<symbols_t>::iterator i = language_.get_begin_language(); i != language_.get_end_language(); i++ ) 
+            {
+                for ( std::set<symbols_t>::iterator j = aux.begin(); j != aux.end(); j++ ) 
+                {
+                    temp = prueba_concatenacion(*i, *j);
+                    final.insert(temp);
+                }
+            }
+            aux = final;
+            
+            if (it != n - 2)
+                final.clear();
+        }
+        std::cout << "\n\t \tResultado potencia: {";
+        for ( std::set<symbols_t>::iterator k = final.begin(); k != final.end(); k++)
+            std::cout << *k << " ";
+            
+        std::cout << "}\n";
+    }
 }
 
 void calculator_t::kleene()
