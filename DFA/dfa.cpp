@@ -283,13 +283,7 @@ void dfa_t::menu()
 		std::cout << "\t0 - Salir\n";
 		std::cout << "\t\t>>> Introduzca una opcion: ";
 
-
-
 	    std::cin >> option;
-
-	    std::cout << "\n\tPulse enter para ir a la opcion...";
-        std::cin.ignore();
-        std::cin.ignore();
 
         system("clear");
 
@@ -364,16 +358,13 @@ void dfa_t::check_user(std::string str)
 		q = get_state(next);		//la primera iteracion al ser next = qstart, sera el nodo 0
 		
 		std::vector<transition_t> trans = q.get_transition();
-		
-		int sizeta = trans.size();
 
-
-		for ( int j = 0; j < sizeta; j++)
+		for ( int j = 0; j < trans.size(); j++)
 		{
-			if ( trans[j].get_symbol == str[i] )
+			if ( str[i] == trans[j].get_symbol()  )
 			{
 				std::cout << "\t" << next << std::setw(16) << str[i];
-				next = trans[j].get_next;
+				next = trans[j].get_next();
 				std::cout << std::setw(11) << next << "\n";
 			}
 		}
