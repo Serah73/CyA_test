@@ -22,7 +22,7 @@ class dfa_t
 {
 private:
 
-	int nstates_, qstart_;
+	int nstates_, qstart_, error_state_;
 	std::set<state_t> dfa_;
 	std::set<char> alphabet_;
 
@@ -42,6 +42,8 @@ public:
 	int get_nstates() const;
 	int get_qstart();
 	int get_qstart() const;
+	int get_error_state();
+	int get_error_state() const;
 	std::set<char> get_alphabet();
 	std::set<char> get_alphabet() const;
 
@@ -52,7 +54,11 @@ public:
 
 	state_t get_state(int);
 
+//Set's
+	void set_error_state(int);
+
 //Checked
+	bool check_states(std::set<state_t>);
 	bool check_format(char[]);
 	void dead_state();
 	void write();

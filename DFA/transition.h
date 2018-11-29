@@ -32,7 +32,7 @@ public:
 	char get_symbol();
 	int get_next() const;
 	int get_next();
-	
+
 //	bool operator==(std::string);
 //	transition_t operator=(const transition_t &tr);
 

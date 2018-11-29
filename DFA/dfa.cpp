@@ -9,53 +9,14 @@
 
 dfa_t::dfa_t():
 nstates_(0),
-qstart_(0)
+qstart_(0),
+error_state_(0)
 {
 	error_ = false;
 }
 
 dfa_t::dfa_t(char file[])
 {
-	/*bool format;
-	std::string linea;
-	std::ifstream input;
-	int sum = 0;
-
-	    format = check_format(file);
-
-	    if(format)
-	    {
-	        input.open(file);
-
-	        if (input.is_open())
-	        {
-	            input >> (int &) nstates_ >> (int &) qstart_;
-	            linea.clear();
-
-	            while(getline(input, linea))
-	            {
-	                if(sum != 0){
-	                    state_t e_aux(linea);
-	                    dfa_.insert(e_aux);
-	                    linea.clear();
-	                }
-	                sum++;
-	            }
-
-	            std::cout << "\t--Se ha instalado correstamente el DFA--" << std::endl;
-	            error_ = false;
-	        }else
-	        {
-
-	        	std::cout << "\t** Error: Ha fallado la instalacion de su DFA **" << std::endl;
-	        }
-	        input.close();
-	    } else
-	    {
-
-	    	std::cout << "Error: Revise el formato del archivo*" << std::endl;
-	        error_ = true;
-	    }*/
 	build(file);
 }
 
@@ -64,7 +25,8 @@ nstates_(dfa.nstates_),
 qstart_(dfa.qstart_),
 dfa_(dfa.dfa_),
 error_(dfa.error_),
-alphabet_(dfa.alphabet_)
+alphabet_(dfa.alphabet_),
+error_state_(dfa.error_state_)
 {}
 
 dfa_t::~dfa_t(){}
@@ -95,29 +57,29 @@ void dfa_t::build(char file[])
 		        	state_t e_aux(linea);
 		            dfa_.insert(e_aux);
 		            t_aux = e_aux.get_transition();
-		            
+
 		            int size_t = t_aux.size();
-		            
+
 		            for ( int i = 0; i < t_aux.size(); i++ )
 		            	alphabet_.insert(t_aux[i].get_symbol() );
-		       		
-		       		linea.clear();	
+
+		       		linea.clear();
 		        }
 		        sum++;
 		    }
 
 		    std::cout << "\t--Se ha instalado correstamente el DFA--" << std::endl;
-		    error_ = false;
-		    
-		    	
+
+		    if ( !(check_states(dfa_)) )
+		    	std::cout << "\n\tHe detectado que existe una transicion al estado : " << get_error_state() << ", el cual no esta definido en el archivo.\n";
+
 		 }else
 			std::cout << "\t** Error: Ha fallado la instalacion de su DFA **" << std::endl;
-		 
+
 		 input.close();
 	} else
 	{
 		std::cout << "Error: Revise el formato del archivo*" << std::endl;
-	    error_ = true;
 	}
 }
 
@@ -137,6 +99,14 @@ int dfa_t::get_qstart()
 int dfa_t::get_qstart() const
 {
 	return qstart_;
+}
+int dfa_t::get_error_state()
+{
+	return error_state_;
+}
+int dfa_t::get_error_state() const
+{
+	return error_state_;
 }
 std::set<char> dfa_t::get_alphabet()
 {
@@ -174,8 +144,28 @@ state_t dfa_t::get_state(int q)
 
 	return dummy;
 }
-
+//Set's
+void dfa_t::set_error_state(int est)
+{
+	error_state_= est;
+}
 //Checked
+bool dfa_t::check_states(std::set<state_t> setty)
+{
+	for(std::set<state_t>::iterator it = setty.begin(); it != setty.end(); it++)
+	{
+		state_t dummy = *it;
+
+		for(int i = 0; i < dummy.get_transition().size(); i++)
+			if ( dummy.get_transition()[i].get_next() >= get_nstates() )
+			{
+				set_error_state(dummy.get_transition()[i].get_next());
+				return false;
+			}
+	}
+	return true;
+}
+
 bool dfa_t::check_format(char file[]) 	//comprobar
 {
 	int line = 0;
@@ -295,7 +285,7 @@ void dfa_t::menu()
 
 	            std::cout << "\n\tIntroduzca un archivo: ";
 	            std::cin >> fn;
-	            
+
 	            build(fn);
 
 	            std::cout << "\n\tPulse enter para ir al menu...";
@@ -356,7 +346,7 @@ void dfa_t::check_user(std::string str)
 	while ( i < size )
 	{
 		q = get_state(next);		//la primera iteracion al ser next = qstart, sera el nodo 0
-		
+
 		std::vector<transition_t> trans = q.get_transition();
 
 		for ( int j = 0; j < trans.size(); j++)
